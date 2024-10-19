@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import BollingerBandsChart from "../components/BollingerBandsChart";
+import AverageTrueRange from "../components/AverageTrueRange";
+import HistoricalVolatality from "../components/HistoricalVolatality";
+import CandleChart from "../components/CandleChart";
 import "./Homepage.css";
 
 const Homepage = ({ coin }) => {
@@ -33,6 +36,15 @@ const Homepage = ({ coin }) => {
             <h2 style={{ textAlign: "left", marginLeft: "10px" }}>{selectedOption} Bollinger Bands (Real-Time)</h2>
 
             <BollingerBandsChart coin={selectedOption} />
+            <h2 style={{ textAlign: "left", marginLeft: "10px" }}>{selectedOption} Average True Range (Real-Time)</h2>
+
+            <AverageTrueRange coin={selectedOption} />
+            <h2 style={{ textAlign: "left", marginLeft: "10px" }}>{selectedOption} Historical Volatile (Real-Time)</h2>
+
+            <HistoricalVolatality coin={selectedOption} />
+            <h2 style={{ textAlign: "left", marginLeft: "10px" }}>{selectedOption} Candle Chart (Real-Time)</h2>
+
+            <CandleChart coin={selectedOption} />
           </div>
         </div>
         <div className="section-30">

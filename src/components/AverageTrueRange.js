@@ -10,7 +10,7 @@ import {
     Legend,
     ResponsiveContainer
 } from "recharts";
-
+import "./BollingerBandsChart.css";
 export default function AverageTrueRange() {
     const [chartData, setChartData] = useState([]);
 
@@ -21,12 +21,23 @@ export default function AverageTrueRange() {
             const data = response.data.data; // Assuming the data comes in { data: [...] } format
 
             // Transform data to match Recharts format
-            const transformedData = data.map((item) => ({
-                received_at: new Date(item.received_at).toLocaleTimeString(), // Format the timestamp
-                ATR: parseFloat(item.ATR), // Ensure the ATR is a float
-            }));
+            // Transform data to match Recharts format with a 7-hour reduction in received_at
+            const transformedData = data.map((item) => {
+                // Convert received_at to a Date object
+                const receivedAtDate = new Date(item.received_at);
+
+                // Subtract 7 hours
+                receivedAtDate.setHours(receivedAtDate.getHours() - 7);
+
+                // Return the transformed data
+                return {
+                    received_at: receivedAtDate.toLocaleTimeString(), // Format the adjusted timestamp
+                    ATR: parseFloat(item.ATR), // Ensure the ATR is a float
+                };
+            });
 
             console.log(transformedData); // Log data to inspect changes
+
 
             setChartData(transformedData);
         } catch (error) {
@@ -48,8 +59,8 @@ export default function AverageTrueRange() {
     }, []);
 
     return (
-        <div style={{ width: '100%', height: 500 }}>
-            <ResponsiveContainer>
+        <div  className='chart-container'style={{ width: '100%', height: 500 }}>
+            <ResponsiveContainer> 
                 <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis

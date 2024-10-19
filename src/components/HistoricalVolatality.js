@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./BollingerBandsChart.css";
 import axios from "axios"; // Ensure axios is installed
 import {
     LineChart,
@@ -21,12 +22,23 @@ export default function HistoricalVolatility() {
             const data = response.data.data; // Assuming the data comes in { data: [...] } format
 
             // Transform data to match Recharts format
-            const transformedData = data.map((item) => ({
-                received_at: new Date(item.received_at).toLocaleTimeString(), // Format the timestamp
-                historical_volatility: parseFloat(item.historical_volatility), // Ensure the historical volatility is a float
-            }));
-
+            const transformedData = data.map((item) => {
+                // Convert received_at to a Date object
+                const receivedAtDate = new Date(item.received_at);
+            
+                // Subtract 7 hours from the timestamp
+                receivedAtDate.setHours(receivedAtDate.getHours() - 7);
+            
+                // Return the transformed data
+                return {
+                    received_at: receivedAtDate.toLocaleTimeString(), // Format the adjusted timestamp
+                    historical_volatility: parseFloat(item.historical_volatility), // Ensure historical volatility is a float
+                };
+            });
+            
+            // Set the adjusted data into the chart
             setChartData(transformedData);
+            
         } catch (error) {
             console.error('Error fetching chart data:', error);
         }
@@ -46,7 +58,7 @@ export default function HistoricalVolatility() {
     }, []);
 
     return (
-        <div style={{ width: '100%', height: 500 }}>
+        <div className='chart-container'style={{ width: '100%', height: 500 }}>
             <ResponsiveContainer>
                 <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />

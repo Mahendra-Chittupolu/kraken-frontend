@@ -11,7 +11,7 @@ import {
     Bar,
     Line,
 } from "recharts";
-
+import "./BollingerBandsChart.css";
 export default function CandlestickChart() {
     const [chartData, setChartData] = useState([]);
 
@@ -21,16 +21,26 @@ export default function CandlestickChart() {
             const response = await axios.get('http://localhost:4000/api/analytics/get_candle_data?coin=XBT');
             const data = response.data.data;
 
-            // Transform data to match Recharts format
-            const transformedData = data.map((item) => ({
-                time: new Date(item.time_interval).toLocaleTimeString(), // Format the timestamp
-                open: parseFloat(item.open_price),
-                close: parseFloat(item.close_price),
-                high: parseFloat(item.high_price),
-                low: parseFloat(item.low_price),
-            }));
-
+            const transformedData = data.map((item) => {
+                // Convert time_interval to a Date object
+                const timeIntervalDate = new Date(item.time_interval);
+            
+                // Subtract 7 hours from the timestamp
+                timeIntervalDate.setHours(timeIntervalDate.getHours() - 7);
+            
+                // Return the transformed data with the adjusted timestamp and parsed float values
+                return {
+                    time: timeIntervalDate.toLocaleTimeString(), // Format the adjusted timestamp
+                    open: parseFloat(item.open_price),  // Ensure open price is a float
+                    close: parseFloat(item.close_price), // Ensure close price is a float
+                    high: parseFloat(item.high_price), // Ensure high price is a float
+                    low: parseFloat(item.low_price), // Ensure low price is a float
+                };
+            });
+            
+            // Set the adjusted data into the chart
             setChartData(transformedData);
+            
         } catch (error) {
             console.error('Error fetching chart data:', error);
         }
@@ -50,7 +60,7 @@ export default function CandlestickChart() {
     }, []);
 
     return (
-        <div style={{ width: '100%', height: 500 }}>
+        <div className='chart-container'  style={{ width: '100%', height: 500 }}>
             <ResponsiveContainer>
                 <ComposedChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
