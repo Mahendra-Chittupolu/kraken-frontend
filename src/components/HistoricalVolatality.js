@@ -58,7 +58,7 @@ export default function HistoricalVolatility() {
     }, []);
 
     return (
-        <div className='chart-container'style={{ width: '100%', height: 500 }}>
+        <div className='chart-container'    style={{ width: '100%', height: 500 }}>
             <ResponsiveContainer>
                 <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
