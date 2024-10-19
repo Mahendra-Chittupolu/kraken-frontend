@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import BollingerBandsChart from "./components/BollingerBandsChart";
 import "./App.css"; // Optional: For global styling
+import AverageTrueRange from "./components/AverageTrueRange";
+import HistoricalVolatality from "./components/HistoricalVolatality";
+import CandleChart from "./components/CandleChart";
 
 function App() {
   const [selectedCoin, setSelectedCoin] = useState("XBT");
@@ -27,6 +30,9 @@ function App() {
           </select>
         </div>
         <BollingerBandsChart coin={selectedCoin} />
+        <AverageTrueRange coin={selectedCoin} />
+        <HistoricalVolatality coin={selectedCoin} />
+        <CandleChart coin={selectedCoin} />
       </main>
     </div>
   );
