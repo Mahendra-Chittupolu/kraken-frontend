@@ -66,9 +66,6 @@ function App() {
             <option value="XBT">XBT</option>
           </select>
         </div>
-        <AverageTrueRange coin={selectedCoin} />
-        <HistoricalVolatality coin={selectedCoin} />
-        <CandleChart coin={selectedCoin} />
         <Homepage coin={selectedCoin} />
         
       </main>
