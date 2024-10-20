@@ -33,16 +33,22 @@ const Homepage = ({ coin }) => {
               boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Optional shadow for a more elevated look
             }}
           >
-            <h2 style={{ textAlign: "left", marginLeft: "10px" }}>{selectedOption} Bollinger Bands (Real-Time)</h2>
+            <h2 style={{ textAlign: "left", marginLeft: "10px" }}>
+              {selectedOption} Bollinger Bands (Real-Time)
+            </h2>
 
             <BollingerBandsChart coin={selectedOption} />
-            <h2 style={{ textAlign: "left", marginLeft: "10px" }}>{selectedOption} Average True Range (Real-Time)</h2>
+            {/* <h2 style={{ textAlign: "left", marginLeft: "10px" }}>{selectedOption} Average True Range (Real-Time)</h2>
 
-            <AverageTrueRange coin={selectedOption} />
-            <h2 style={{ textAlign: "left", marginLeft: "10px" }}>{selectedOption} Historical Volatile (Real-Time)</h2>
+            <AverageTrueRange coin={selectedOption} /> */}
+            <h2 style={{ textAlign: "left", marginLeft: "10px" }}>
+              {selectedOption} Historical Volatile (Real-Time)
+            </h2>
 
             <HistoricalVolatality coin={selectedOption} />
-            <h2 style={{ textAlign: "left", marginLeft: "10px" }}>{selectedOption} Candle Chart (Real-Time)</h2>
+            <h2 style={{ textAlign: "left", marginLeft: "10px" }}>
+              {selectedOption} Candle Chart (Real-Time)
+            </h2>
 
             <CandleChart coin={selectedOption} />
           </div>

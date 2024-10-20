@@ -378,15 +378,14 @@
 //     </div>
 //   );
 // };
-
-// export default CoinStats;
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./CoinStats.css"; // Import the CSS file for custom styling
 
 const CoinStats = () => {
   const [stats, setStats] = useState(null);
   const [error, setError] = useState(null);
-  const [count, setCount] = useState(0);
+//   const [count, setCount] = useState(0);
 
   // Function to fetch Coin Stats data from the backend API
   const fetchCoinStats = async () => {
@@ -424,49 +423,48 @@ const CoinStats = () => {
     // Set up an interval to fetch data every 1 second
     const intervalId = setInterval(() => {
       fetchCoinStats();
-      // Use functional update to ensure the latest value of count is used
-      setCount((prevCount) => prevCount + 1);
-    }, 1000); // 1000 milliseconds = 1 second
+    }, 1000);
 
     // Cleanup the interval on component unmount
     return () => {
       clearInterval(intervalId);
     };
-  }, []); // Empty dependency array ensures this effect runs only once on mount
+  }, []);
 
   if (error) return <div>Error: {error}</div>;
   if (!stats) return <div>Loading stats...</div>;
 
   return (
-    <div>
-      <p>API Requests Made: {count}</p>
-      <h2>Real-Time Coin Stats</h2>
-      <div className="stats">
-        <p>
-          <strong>Best Ask Price Coin:</strong> {stats.best_ask_coin} -{" "}
-          {stats.best_ask_price}
-        </p>
-        <p>
-          <strong>Best Bid Price Coin:</strong> {stats.best_bid_coin} -{" "}
-          {stats.best_bid_price}
-        </p>
-        <p>
-          <strong>Max Volume Coin:</strong> {stats.max_volume_coin} -{" "}
-          {stats.max_volume}
-        </p>
-        <p>
-          <strong>Max Price Coin:</strong> {stats.max_price_coin} -{" "}
-          {stats.max_price}
-        </p>
-        <p>
-          <strong>Min Volume Coin:</strong> {stats.min_volume_coin} -{" "}
-          {stats.min_volume}
-        </p>
-        <p>
-          <strong>Min Price Coin:</strong> {stats.min_price_coin} -{" "}
-          {stats.min_price}
-        </p>
-      </div>
+    <div className="coin-stats-container">
+      <h2 className="heading">Real-Time Coin Stats</h2>
+      <table className="coin-stats-table">
+        <tbody>
+          <tr>
+            <td>Best Ask Price Coin:</td>
+            <td>{stats.best_ask_coin} - {stats.best_ask_price}</td>
+          </tr>
+          <tr>
+            <td>Best Bid Price Coin:</td>
+            <td>{stats.best_bid_coin} - {stats.best_bid_price}</td>
+          </tr>
+          <tr>
+            <td>Max Volume Coin:</td>
+            <td>{stats.max_volume_coin} - {stats.max_volume}</td>
+          </tr>
+          <tr>
+            <td>Max Price Coin:</td>
+            <td>{stats.max_price_coin} - {stats.max_price}</td>
+          </tr>
+          <tr>
+            <td>Min Volume Coin:</td>
+            <td>{stats.min_volume_coin} - {stats.min_volume}</td>
+          </tr>
+          <tr>
+            <td>Min Price Coin:</td>
+            <td>{stats.min_price_coin} - {stats.min_price}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

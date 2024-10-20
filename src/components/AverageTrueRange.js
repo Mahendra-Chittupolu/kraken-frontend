@@ -38,7 +38,7 @@ export default function AverageTrueRange() {
         };
       });
 
-      console.log(transformedData); // Log data to inspect changes
+    //   console.log(transformedData); // Log data to inspect changes
 
       setChartData(transformedData);
     } catch (error) {

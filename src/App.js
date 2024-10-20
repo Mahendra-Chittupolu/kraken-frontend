@@ -39,7 +39,9 @@
 import React, { useState } from "react";
 import BollingerBandsChart from "./components/BollingerBandsChart";
 import Homepage from "./templates/Homepage";
-
+import PurchaseButton from "./components/PurchaseButton"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import CoinStats from "./components/CoinStats";
 import "./App.css"; // Optional: For global styling
 import AverageTrueRange from "./components/AverageTrueRange";
@@ -93,6 +95,8 @@ function App() {
         </div>
         <Homepage coin={selectedCoin} />
         <CoinStats/>
+        <PurchaseButton/>
+        <ToastContainer />
       </main>
     </div>
   );
