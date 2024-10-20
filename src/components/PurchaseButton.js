@@ -135,14 +135,7 @@ const PurchaseButton = () => {
           style={styles.purchaseButton}
           disabled={!walletAddress || isProcessing}
         >
-          {isProcessing ? "Processing..." : "Buy Fake ETH"}
-        </button>
-        <button
-          onClick={handleFetchBalance}
-          style={styles.balanceButton}
-          disabled={!walletAddress}
-        >
-          Check Sepolia ETH Balance
+          {isProcessing ? "Processing..." : "Buy ETH"}
         </button>
       </div>
     </div>
