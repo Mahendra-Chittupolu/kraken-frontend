@@ -21,7 +21,7 @@ const BollingerBandsChart = ({ coin }) => {
   const fetchBollingerBandsData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/analytics/bollinger-bands?coin=${coin}&period=20&stdDev=2`
+        `${process.env.REACT_APP_BACKEND_URL}/api/analytics/bollinger-bands?coin=${coin}&period=20&stdDev=2`
       );
       const { bollinger_bands, average_close_price } = response.data;
 

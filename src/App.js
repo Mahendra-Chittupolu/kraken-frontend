@@ -40,6 +40,7 @@ import React, { useState } from "react";
 import BollingerBandsChart from "./components/BollingerBandsChart";
 import Homepage from "./templates/Homepage";
 
+import CoinStats from "./components/CoinStats";
 import "./App.css"; // Optional: For global styling
 import AverageTrueRange from "./components/AverageTrueRange";
 import HistoricalVolatality from "./components/HistoricalVolatality";
@@ -51,6 +52,28 @@ function App() {
   const handleCoinChange = (e) => {
     setSelectedCoin(e.target.value.toUpperCase());
   };
+  const supportedCoins = [
+    "XBT",
+    "SOL",
+    "ETH",
+    "MATIC",
+    "ADA",
+    "BNB",
+    "XRP",
+    "LTC",
+    "LINK",
+    "DOGE",
+    "DOT",
+    "SHIB",
+    "AVAX",
+    "ATOM",
+    "XLM",
+    "AAVE",
+    "UNI",
+    "XTZ",
+    "USDT",
+    "USDC",
+  ];
 
   return (
     <div className="App">
@@ -61,13 +84,15 @@ function App() {
         <div className="coin-selector">
           <label htmlFor="coin">Select Coin: </label>
           <select id="coin" value={selectedCoin} onChange={handleCoinChange}>
-            <option value="ETH">ETH</option>
-            <option value="SOL">SOL</option>
-            <option value="XBT">XBT</option>
+            {supportedCoins.map((coin) => (
+              <option key={coin} value={coin}>
+                {coin}
+              </option>
+            ))}
           </select>
         </div>
         <Homepage coin={selectedCoin} />
-        
+        <CoinStats/>
       </main>
     </div>
   );
